@@ -1,0 +1,38 @@
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+.nav-login{
+    display:flex;
+    ul{
+        display:flex;
+        a{
+            padding:15px;
+            line-height:20px;
+            display:block;
+        }
+    }
+    .aside-btn{
+        display:flex;
+        padding:20px;
+        span{
+            margin-right:10px;
+        }
+        i{
+            transform: translateY(15%)
+        }
+    }
+}
+
+    .input.error{
+        border-color:red;
+    }
+
+span.error{
+    padding:10px;
+    color:red;
+}
