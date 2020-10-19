@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main');
+    $last_posts = App\Post::orderBy('created_at', 'desc')->take(4)->get();
+    $categories = App\Category::all();
+    return view('main')->with(['last_posts' => $last_posts, 'categories' => $categories]);
 })->name('home');
 
 Route::get('/category/create', 'CategoryController@create');
@@ -23,6 +25,7 @@ Route::get('/category/{category:slug}', 'CategoryController@show')->name('catego
 
 Route::get('/post/create', 'PostController@create')->name('post.create');
 Route::post('/post/store', 'PostController@store')->name('post.store');
+Route::get('/post/{post:slug}', 'PostController@show')->name('post.show');
 
 Auth::routes();
 

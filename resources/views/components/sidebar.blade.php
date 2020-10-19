@@ -1,7 +1,7 @@
 <!-- ad widget-->
 <div class="aside-widget text-center">
     <a href="#" style="display: inline-block;margin: auto;">
-        <img class="img-responsive" src="./img/ad-3.jpg" alt="">
+        <img class="img-responsive" src="{{asset('img/ad-3.jpg')}}" alt="">
     </a>
 </div>
 <!-- /ad widget -->
@@ -43,11 +43,9 @@
     </div>
     <div class="category-widget">
         <ul>
-            <li><a href="#">Lifestyle <span>451</span></a></li>
-            <li><a href="#">Fashion <span>230</span></a></li>
-            <li><a href="#">Technology <span>40</span></a></li>
-            <li><a href="#">Travel <span>38</span></a></li>
-            <li><a href="#">Health <span>24</span></a></li>
+            @foreach(App\Category::all() as $category)
+                <li><a href="{{route('category.show', $category->slug)}}">{{$category->title}} <span>{{$category->posts->count()}}</span></a></li>
+            @endforeach
         </ul>
     </div>
 </div>
@@ -144,9 +142,9 @@
 <!-- /galery widget -->
 
 <!-- Ad widget -->
-<div class="aside-widget text-center">
+{{-- <div class="aside-widget text-center">
     <a href="#" style="display: inline-block;margin: auto;">
         <img class="img-responsive" src="./img/ad-1.jpg" alt="">
     </a>
-</div>
+</div> --}}
 <!-- /Ad widget -->

@@ -16,7 +16,7 @@
 
                 <!-- logo -->
                 <div class="nav-logo">
-                    <a href="index.html" class="logo"><img src="{{asset('/img/logo.png')}}" alt=""></a>
+                    <a href="{{route('home')}}" class="logo"><img src="{{asset('/img/logo.png')}}" alt=""></a>
                 </div>
                 <!-- /logo -->
 
@@ -73,76 +73,50 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <ul class="tab-nav">
-                                        <li class="active"><a data-toggle="tab" href="#tab1">Lifestyle</a></li>
-                                        <li><a data-toggle="tab" href="#tab2">Fashion</a></li>
-                                        <li><a data-toggle="tab" href="#tab1">Health</a></li>
-                                        <li><a data-toggle="tab" href="#tab2">Travel</a></li>
+                                        @foreach(App\Category::all() as $category)
+                                        @if($loop->first)
+                                        <li class="active"><a data-toggle="tab" href="#tab{{$category->id}}">{{$category->title}}</a></li>
+                                        @endif
+                                        <li><a data-toggle="tab" href="#tab{{$category->id}}">{{$category->title}}</a></li>
+                                        @endforeach
+
                                     </ul>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="dropdown-body tab-content">
                                         <!-- tab1 -->
-                                        <div id="tab1" class="tab-pane fade in active">
+                                        @foreach(App\Category::all() as $category)
+                                    <div id="tab{{$category->id}}" class="tab-pane fade in @if($loop->first)active @endif">
                                             <div class="row">
+                                                @foreach($category->posts()->orderBy('created_at', 'desc')->take(3)->get() as $post)
                                                 <!-- post -->
                                                 <div class="col-md-4">
                                                     <div class="post post-sm">
                                                         <a class="post-img" href="blog-post.html"><img src="{{asset('img/post-10.jpg')}}" alt=""></a>
                                                         <div class="post-body">
                                                             <div class="post-category">
-                                                                <a href="category.html">Travel</a>
+                                                                @foreach($post->categories as $category)
+                                                                <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
+                                                                @endforeach
                                                             </div>
-                                                            <h3 class="post-title title-sm"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
+                                                            <h3 class="post-title title-sm"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
                                                             <ul class="post-meta">
-                                                                <li><a href="author.html">John Doe</a></li>
-                                                                <li>20 April 2018</li>
+                                                                <li><a href="author.html">{{$post->user->name}}</a></li>
+                                                                <li>{{$post->created_at->diffForHumans()}}</li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- /post -->
+                                                @endforeach
 
-                                                <!-- post -->
-                                                <div class="col-md-4">
-                                                    <div class="post post-sm">
-                                                        <a class="post-img" href="blog-post.html"><img src="{{asset('img/post-13.jpg')}}" alt=""></a>
-                                                        <div class="post-body">
-                                                            <div class="post-category">
-                                                                <a href="category.html">Travel</a>
-                                                                <a href="category.html">Lifestyle</a>
-                                                            </div>
-                                                            <h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-                                                            <ul class="post-meta">
-                                                                <li><a href="author.html">John Doe</a></li>
-                                                                <li>20 April 2018</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /post -->
 
-                                                <!-- post -->
-                                                <div class="col-md-4">
-                                                    <div class="post post-sm">
-                                                        <a class="post-img" href="blog-post.html"><img src="{{asset('img/post-12.jpg')}}" alt=""></a>
-                                                        <div class="post-body">
-                                                            <div class="post-category">
-                                                                <a href="category.html">Lifestyle</a>
-                                                            </div>
-                                                            <h3 class="post-title title-sm"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-                                                            <ul class="post-meta">
-                                                                <li><a href="author.html">John Doe</a></li>
-                                                                <li>20 April 2018</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /post -->
                                             </div>
                                         </div>
+                                        @endforeach
                                         <!-- /tab1 -->
 
-                                        <!-- tab2 -->
+                                        {{-- <!-- tab2 -->
                                         <div id="tab2" class="tab-pane fade in">
                                             <div class="row">
                                                 <!-- post -->
@@ -203,7 +177,7 @@
                                         </div>
                                         <!-- /tab2 -->
 
-                                        <!-- /tab3 tab4 .. -->
+                                        <!-- /tab3 tab4 .. --> --}}
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +249,7 @@
         <!-- Aside Nav -->
         <div id="nav-aside">
             <ul class="nav-aside-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{route('home')}}">Home</a></li>
                 <li class="has-dropdown"><a>Categories</a>
                     <ul class="dropdown">
                         @foreach(App\Category::all() as $category)

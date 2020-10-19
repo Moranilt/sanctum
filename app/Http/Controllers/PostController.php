@@ -9,6 +9,11 @@ use App\Post;
 
 class PostController extends Controller
 {
+    public function show(Post $post)
+    {
+        return view('post.show')->with('post', $post);
+    }
+
     public function create()
     {
         return view('post.create');
@@ -18,7 +23,8 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|max:255',
-            'body' => 'required'
+            'body' => 'required',
+            'categories' => 'required'
         ]);
 
         $post = new Post();
@@ -28,8 +34,7 @@ class PostController extends Controller
         $post->excerpt = Str::limit($data['body'], 40, '...');
         $post->body = $data['body'];
         $post->save();
-        $category = Category::find(8);
-        $post->addCategory($category);
+        $post->addCategory($data['categories']);
 
         return redirect()->route('home');
     }

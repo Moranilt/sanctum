@@ -17,7 +17,18 @@
                                         <span class="error">{{$message}}</span>
                                         @enderror
 									</div>
-								</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="section-title">
+                                        <h2 class="title">Categories</h2>
+                                    </div>
+                                        @foreach(App\Category::all() as $category)
+                                        <div class="checkbox">
+                                            <label for="{{$category->id}}"><input type="checkbox" name="categories[]" id="{{$category->id}}" value="{{$category->id}}">{{$category->title}}</label>
+                                        </div>
+                                        @endforeach
+
+                                </div>
 								<div class="col-md-12">
 									<div class="form-group">
                                     <textarea class="input @error('body')error @enderror" name="body" placeholder="Enter text here...">{{old('body')}}</textarea>

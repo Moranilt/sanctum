@@ -16,8 +16,10 @@
 
 
 @section('content')
-                <x-last-post></x-last-post>
-                <x-post></x-post>
+                <x-last-post :post="$category->posts->last()"></x-last-post>
+                @foreach($category->posts()->orderBy('created_at', 'desc')->get() as $post)
+                <x-post :post="$post"></x-post>
+                @endforeach
                 <div class="section-row loadmore text-center">
                     <a href="#" class="primary-button">Load More</a>
                 </div>
