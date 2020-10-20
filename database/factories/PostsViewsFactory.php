@@ -2,13 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Comment;
+use App\PostsViews;
 use Faker\Generator as Faker;
 
-$factory->define(Comment::class, function (Faker $faker) {
+$factory->define(PostsViews::class, function (Faker $faker) {
     return [
-        'user_id' => $faker->numberBetween(1, 10),
         'post_id' => $faker->numberBetween(1, 10),
-        'body' => $faker->text
+        'views' => $faker->numberBetween(20, 500)
     ];
 });

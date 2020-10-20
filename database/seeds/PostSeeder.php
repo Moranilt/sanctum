@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Category;
 
 class PostSeeder extends Seeder
 {
@@ -12,9 +11,13 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Post::class, 15)->create()->each(function($post){
-            $post->addCategory(App\Category::all()->random(rand(1, 3))->pluck('id')->toArray());
+        factory(App\Post::class, 10)->create()->each(function($post){
+            $post->addCategory(App\Category::all()->random(rand(1, 2))->pluck('id')->toArray());
+            $post->comments()->createMany(factory(App\Comment::class, 10)->make()->toArray());
+            $post->views()->save(factory(App\PostsViews::class)->make());
         });
+
+
 
     }
 }

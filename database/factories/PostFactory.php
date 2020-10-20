@@ -6,12 +6,12 @@ use App\Post;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
-    $title = $faker->jobTitle;
+    $title = $faker->unique()->jobTitle;
     $slug = Str::slug($title, '-');
     $body = $faker->text;
     $excerpt = Str::limit($body, 40, '...');
     return [
-        'user_id' => factory(App\User::class),
+        'user_id' => $faker->numberBetween(1, 10),
         'title' => $title,
         'slug' => $slug,
         'body' => $body,
