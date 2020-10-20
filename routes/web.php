@@ -27,6 +27,8 @@ Route::get('/post/create', 'PostController@create')->name('post.create');
 Route::post('/post/store', 'PostController@store')->name('post.store');
 Route::get('/post/{post:slug}', 'PostController@show')->name('post.show');
 
+Route::get('/post/{post:slug}/comment/store', 'CommentController@store')->name('comment.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('etc');

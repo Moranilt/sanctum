@@ -2,6 +2,7 @@
 
 namespace App;
 Use App\Helpers;
+use App\PostsViews;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -28,5 +29,20 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
+
+    public function views()
+    {
+        return $this->hasOne(PostsViews::class);
+    }
+
+    public function countViews()
+    {
+        return $this->views->views;
+    }
+
+    public function countComments()
+    {
+        return $this->comments->count();
     }
 }
