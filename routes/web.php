@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function(){
     Route::delete('/post/{post:slug}/delete', 'PostController@delete')->name('post.delete');
 
     Route::get('/post/{post:slug}/comment/store', 'CommentController@store')->name('comment.store');
+    Route::get('/users/{user:slug}/edit', 'UserController@edit')->name('user.edit');
+    Route::put('/users/{user:slug}/update', 'UserController@update')->name('user.update');
 });
 Route::get('/users/{user:slug}', 'UserController@show')->name('user.show');
 

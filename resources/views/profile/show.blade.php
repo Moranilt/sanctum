@@ -16,7 +16,7 @@
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 								<li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul>
-                            <a href="#" class="primary-button" style="margin-top:20px;">Edit</a>
+                            <a href="{{route('user.edit', $user->slug)}}" class="primary-button" style="margin-top:20px;">Edit</a>
 						</div>
 					</div>
 				</div>
