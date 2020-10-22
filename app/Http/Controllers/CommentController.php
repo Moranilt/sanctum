@@ -16,9 +16,10 @@ class CommentController extends Controller
         ]);
 
         $comment = new Comment();
-
-        if(!is_null($data['parent_id'])){
-            $comment->parent_id = $data['parent_id'];
+        if(isset($data['parent_id'])){
+            if(!is_null($data['parent_id'])){
+                $comment->parent_id = $data['parent_id'];
+            }
         }
         $comment->user_id = auth()->user()->id;
         $comment->post_id = $post->id;
