@@ -15,9 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,5 +38,15 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        return asset($value ? "/storage/{$value}" : '/img/default-avatar.png');
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        return $value ? $value : 'Tell this world more about yourself ;)';
     }
 }
