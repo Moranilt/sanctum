@@ -26,6 +26,11 @@ class Post extends Model
         return $this->categories()->attach($category);
     }
 
+    public function addViews($views)
+    {
+        return $this->views()->save($views);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class)->whereNull('parent_id');
@@ -43,6 +48,16 @@ class Post extends Model
 
     public function countComments()
     {
-        return $this->comments->count();
+        return $this->allComments->count();
+    }
+
+    public function allComments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function popularPost()
+    {
+        return $this->views()->orderBy('views', 'desc')->first();
     }
 }
