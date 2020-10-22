@@ -29,6 +29,16 @@
                                         @endforeach
 
                                 </div>
+
+                                <div class="col-md-12">
+									<div class="form-group">
+                                    <input class="input @error('tags')error @enderror" type="text" name="tags" placeholder="tags" value="{{old('tags')}}">
+                                        @error('tags')
+                                        <span class="error">{{$message}}</span>
+                                        @enderror
+									</div>
+                                </div>
+
 								<div class="col-md-12">
 									<div class="form-group">
                                     <textarea class="input @error('body')error @enderror" name="body" placeholder="Enter text here...">{{old('body')}}</textarea>

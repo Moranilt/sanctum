@@ -4,6 +4,7 @@ namespace App;
 Use App\Helpers;
 use App\PostsViews;
 use Illuminate\Database\Eloquent\Model;
+use App\Tag;
 
 class Post extends Model
 {
@@ -59,5 +60,15 @@ class Post extends Model
     public function popularPost()
     {
         return $this->views()->orderBy('views', 'desc')->first();
+    }
+
+    public function getPreviewAttribute($value)
+    {
+        return asset($value ? "/storage/{$value}" : 'img/default-preview-post.jpg');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
