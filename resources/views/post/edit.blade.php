@@ -7,7 +7,7 @@
 						<div class="section-title">
 							<h2 class="title">Create Post</h2>
 						</div>
-                        <form action="{{route('post.update', $post->slug)}}" method="post">
+                        <form action="{{route('post.update', $post->slug)}}" method="post" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
 							<div class="row">
@@ -18,6 +18,15 @@
                                         <span class="error">{{$message}}</span>
                                         @enderror
 									</div>
+                                </div>
+                                <div class="col-md-12">
+									<div class="form-group">
+                                    <input class="input @error('preview')error @enderror" type="file" name="preview">
+                                        @error('preview')
+                                        <span class="error">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <img src="{{$post->preview}}" alt="" width="250px">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="section-title">
@@ -39,7 +48,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
                                     <textarea class="input @error('body')error @enderror" name="body" placeholder="Enter text here...">{{$post->body}}</textarea>
-                                        @error('description')
+                                        @error('body')
                                         <span class="error">{{$message}}</span>
                                         @enderror
 									</div>

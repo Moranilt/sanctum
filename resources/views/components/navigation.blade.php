@@ -250,6 +250,17 @@
         <div id="nav-aside">
             <ul class="nav-aside-menu">
                 <li><a href="{{route('home')}}">Home</a></li>
+                @auth
+                <li><a href="{{route('user.show', auth()->user()->slug)}}">My Profile</a></li>
+                <li><a href="/category/create">Add Category</a></li>
+                <li><a href="{{route('post.create')}}">Create Post</a></li>
+                <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">Logout</a></li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                @endauth
                 <li class="has-dropdown"><a>Categories</a>
                     <ul class="dropdown">
                         @foreach(App\Category::all() as $category)
@@ -257,16 +268,8 @@
                         @endforeach
                     </ul>
                 </li>
-            <li><a href="{{route('post.create')}}">Create Post</a></li>
-                <li><a href="contact.html">Contacts</a></li>
-                <li><a href="#">Advertise</a></li>
-                <li><a href="/category/create">Add Category</a></li>
-                <li><a href="{{route('logout')}}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">Logout</a></li>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+
             </ul>
             <button class="nav-close nav-aside-close"><span></span></button>
         </div>

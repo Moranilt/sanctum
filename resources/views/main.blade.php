@@ -12,7 +12,7 @@
 
 					<!-- post -->
 					<div class="post post-thumb">
-						<a class="post-img" href="{{route('post.show', $view->post->slug)}}"><img src="./img/hot-post-1.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $view->post->slug)}}"><img src="{{$view->post->preview}}" alt=""></a>
 						<div class="post-body">
 							<div class="post-category">
                                 @foreach($view->post->categories as $category)
@@ -21,7 +21,7 @@
 							</div>
 							<h3 class="post-title title-lg"><a href="{{route('post.show', $view->post->slug)}}">{{$view->post->title}}</a></h3>
 							<ul class="post-meta">
-								<li><a href="author.html">{{$view->post->user->name}}</a></li>
+								<li><a href="{{route('user.show', $view->post->user->slug)}}">{{$view->post->user->name}}</a></li>
 								<li>{{$view->post->createdAt()}}</li>
 							</ul>
 						</div>
@@ -35,14 +35,14 @@
                 <div class="col-md-4 hot-post-right">
                     <!-- post -->
 					<div class="post post-thumb">
-						<a class="post-img" href="{{route('post.show', $view->post->slug)}}"><img src="./img/hot-post-2.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $view->post->slug)}}"><img src="{{$view->post->preview}}" alt=""></a>
 						<div class="post-body">
 							@foreach($view->post->categories as $category)
                                 <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
                             @endforeach
 							<h3 class="post-title"><a href="{{route('post.show', $view->post->slug)}}">{{$view->post->title}}</a></h3>
 							<ul class="post-meta">
-								<li><a href="author.html">{{$view->post->user->name}}</a></li>
+								<li><a href="{{route('user.show', $view->post->user->slug)}}">{{$view->post->user->name}}</a></li>
 								<li>{{$view->post->createdAt()}}</li>
 							</ul>
 						</div>
@@ -54,14 +54,14 @@
                 @if($loop->last)
 					<!-- post -->
 					<div class="post post-thumb">
-						<a class="post-img" href="{{route('post.show', $view->post->slug)}}"><img src="./img/hot-post-2.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $view->post->slug)}}"><img src="{{$view->post->preview}}" alt=""></a>
 						<div class="post-body">
 							@foreach($view->post->categories as $category)
                                 <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
                             @endforeach
 							<h3 class="post-title"><a href="{{route('post.show', $view->post->slug)}}">{{$view->post->title}}</a></h3>
 							<ul class="post-meta">
-								<li><a href="author.html">{{$view->post->user->name}}</a></li>
+								<li><a href="{{route('user.show', $view->post->user->slug)}}">{{$view->post->user->name}}</a></li>
 								<li>{{$view->post->createdAt()}}</li>
 							</ul>
 						</div>
@@ -95,7 +95,7 @@
                         @foreach($last_posts as $post)
 						<div class="col-md-6">
 							<div class="post">
-								<a class="post-img" href="{{route('post.show', $post->slug)}}"><img src="./img/post-1.jpg" alt=""></a>
+								<a class="post-img" href="{{route('post.show', $post->slug)}}"><img src="{{$post->preview}}" alt=""></a>
 								<div class="post-body">
 									<div class="post-category">
                                         @foreach($post->categories as $category)
@@ -104,7 +104,7 @@
 									</div>
                                 <h3 class="post-title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
 									<ul class="post-meta">
-                                    <li><a href="author.html">{{$post->user->name}}</a></li>
+                                    <li><a href="{{route('user.show', $post->user->slug)}}">{{$post->user->name}}</a></li>
 										<li>{{$post->created_at->diffForHumans()}}</li>
 									</ul>
 								</div>
@@ -129,12 +129,12 @@
 						<!-- post -->
 						<div class="col-md-4">
 							<div class="post post-sm">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-9.jpg" alt=""></a>
+								<a class="post-img" href="{{route('post.show', $post->slug)}}"><img src="{{$post->preview}}" alt=""></a>
 								<div class="post-body">
 									<div class="post-category">
 										<a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
 									</div>
-									<h3 class="post-title title-sm"><a href="blog-post.html">{{$post->title}}</a></h3>
+									<h3 class="post-title title-sm"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
 									<ul class="post-meta">
 										<li><a href="author.html">{{$post->user->name}}</a></li>
 										<li>{{$post->created_at->diffForHumans()}}</li>
@@ -191,24 +191,25 @@
 				<div class="col-md-4">
 					<div class="section-title">
 						<h2 class="title">{{$category->title}}</h2>
-					</div>
+                    </div>
+
 					<!-- post -->
 					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-6.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $category->posts->last()->slug)}}"><img src="{{$category->posts->last()->preview}}" alt=""></a>
 						<div class="post-body">
 							<div class="post-category">
                                 @foreach($category->posts()->latest()->first()->categories as $category2)
                                 <a href="{{route('category.show', $category2->slug)}}">{{$category2->title}}</a>
                                 @endforeach
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei qui</a></h3>
+							<h3 class="post-title"><a href="{{route('post.show', $category->posts->last()->slug)}}">{{$category->posts->last()->title}}</a></h3>
 							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
+								<li><a href="author.html">{{$category->posts->last()->user->name}}</a></li>
+								<li>{{$category->posts->last()->createdAt()}}</li>
 							</ul>
 						</div>
 					</div>
-					<!-- /post -->
+                    <!-- /post -->
                 </div>
                 @endforeach
 
@@ -221,14 +222,14 @@
                     @foreach(App\Post::all()->random(3) as $post)
 					<!-- post -->
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $post->slug)}}"><img src="{{$post->preview}}" alt=""></a>
 						<div class="post-body">
 							<div class="post-category">
                                 @foreach($post->categories as $category)
                                 <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
                                 @endforeach
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">{{$post->title}}</a></h3>
+							<h3 class="post-title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
 						</div>
 					</div>
                     <!-- /post -->
@@ -240,14 +241,14 @@
 					@foreach(App\Post::all()->random(3) as $post)
 					<!-- post -->
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $post->slug)}}"><img src="{{$post->preview}}" alt=""></a>
 						<div class="post-body">
 							<div class="post-category">
                                 @foreach($post->categories as $category)
                                 <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
                                 @endforeach
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">{{$post->title}}</a></h3>
+							<h3 class="post-title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
 						</div>
 					</div>
                     <!-- /post -->
@@ -257,14 +258,14 @@
 					@foreach(App\Post::all()->random(3) as $post)
 					<!-- post -->
 					<div class="post post-widget">
-						<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
+						<a class="post-img" href="{{route('post.show', $post->slug)}}"><img src="{{$post->preview}}" alt=""></a>
 						<div class="post-body">
 							<div class="post-category">
                                 @foreach($post->categories as $category)
                                 <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
                                 @endforeach
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">{{$post->title}}</a></h3>
+							<h3 class="post-title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
 						</div>
 					</div>
                     <!-- /post -->
@@ -286,22 +287,8 @@
 				<div class="col-md-8">
                     <!-- post -->
                     @foreach(App\Post::latest()->take(6)->get() as $post)
-					<div class="post post-row">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-13.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-category">
-								@foreach($post->categories as $category)
-                                <a href="{{route('category.show', $category->slug)}}">{{$category->title}}</a>
-                                @endforeach
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">{{$post->title}}</a></h3>
-							<ul class="post-meta">
-								<li><a href="author.html">{{$post->user->name}}</a></li>
-								<li>{{$post->createdAt()}}</li>
-							</ul>
-							<p>{{$post->excerpt}}</p>
-						</div>
-                    </div>
+					<x-post :post="$post">
+					</x-post>
                     @endforeach
 					<!-- /post -->
 
