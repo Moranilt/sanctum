@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\PostsViews;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -42,11 +43,23 @@ class PostController extends Controller
             'body' => 'required',
             'categories' => 'required',
             'preview' => ['file'],
+            'tags' => ['string', 'required']
         ]);
 
         if($request->preview){
             $data['preview'] = $request->preview->store($data['preview']);
         }
+        //$tags = new Tags();
+        $tagNames = explode(',', $request->tags);
+        $tagIds = [];
+        foreach($tagNames as $tagName){
+            $tag = Tag::firstOrCreate(['name' => Str::of($tagName)->trim()], ['slug' => Str::slug($tagName, '-')]);
+
+            if($tag){
+                $tagIds[] = $tag->id;
+            }
+        }
+
         $post = new Post();
         $post->user_id = auth()->user()->id;
         $post->title = $data['title'];
@@ -58,7 +71,7 @@ class PostController extends Controller
         $post->addCategory($data['categories']);
         $views = new PostsViews();
         $post->addViews($views);
-        return redirect()->route('home');
+        $post->tags()->sync($tagIds);
         return redirect()->route('post.show', $post->slug);
     }
 
@@ -72,7 +85,6 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'categories' => 'required'
             'categories' => 'required',
             'preview' => ['file']
         ]);
