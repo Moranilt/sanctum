@@ -40,20 +40,26 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'categories' => 'required'
+            'categories' => 'required',
+            'preview' => ['file'],
         ]);
 
+        if($request->preview){
+            $data['preview'] = $request->preview->store($data['preview']);
+        }
         $post = new Post();
         $post->user_id = auth()->user()->id;
         $post->title = $data['title'];
         $post->slug = Str::slug($data['title'], '-');
         $post->excerpt = Str::limit($data['body'], 40, '...');
         $post->body = $data['body'];
+        $post->preview = $data['preview'];
         $post->save();
         $post->addCategory($data['categories']);
         $views = new PostsViews();
         $post->addViews($views);
         return redirect()->route('home');
+        return redirect()->route('post.show', $post->slug);
     }
 
     public function edit(Post $post)
@@ -67,13 +73,21 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'body' => 'required',
             'categories' => 'required'
+            'categories' => 'required',
+            'preview' => ['file']
         ]);
+
+        if($request->preview){
+            $data['preview'] = $request->preview->store($data['preview']);
+            $post->preview = $data['preview'];
+        }
         $post->slug = Str::slug($data['title'], '-');
         $post->excerpt = Str::limit($data['body'], 40, '...');
         $post->title = $data['title'];
         $post->body = $data['body'];
         $post->update();
         $post->addCategory($data['categories']);
+
         return redirect()->route('post.show', $post->slug);
     }
 
