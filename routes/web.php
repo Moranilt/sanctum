@@ -14,13 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::middleware('auth')->group(function(){
+    Route::get('/category/create', 'CategoryController@create');
+    Route::post('/category/store', 'CategoryController@store');
+
+    Route::get('/post/create', 'PostController@create')->name('post.create');
+    Route::post('/post/store', 'PostController@store')->name('post.store');
+    Route::get('/post/{post:slug}/edit', 'PostController@edit')->name('post.edit');
+    Route::patch('/post/{post:slug}/update', 'PostController@update')->name('post.update');
+    Route::delete('/post/{post:slug}/delete', 'PostController@delete')->name('post.delete');
+
+    Route::get('/post/{post:slug}/comment/store', 'CommentController@store')->name('comment.store');
+});
+Route::get('/users/{user:slug}', 'UserController@show')->name('user.show');
+
 Route::get('/category/{category:slug}', 'CategoryController@show')->name('category.show');
 
-Route::get('/post/create', 'PostController@create')->name('post.create');
-Route::post('/post/store', 'PostController@store')->name('post.store');
+
 Route::get('/post/{post:slug}', 'PostController@show')->name('post.show');
 
-Route::get('/post/{post:slug}/comment/store', 'CommentController@store')->name('comment.store');
+
 
 Auth::routes();
 
