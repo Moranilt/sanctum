@@ -13,11 +13,22 @@
                 </div>
                 <h1>{{$post->title}}</h1>
                 <ul class="post-meta">
-                    <li><a href="author.html">{{$post->user->name}}</a></li>
+                    <li><a href="{{route('user.show', $post->user->slug)}}">{{$post->user->name}}</a></li>
                     <li>{{$post->created_at->diffForHumans()}}</li>
                     <li><i class="fa fa-comments"></i> {{$post->countComments()}}</li>
                     <li><i class="fa fa-eye"></i> {{$post->countViews()}}</li>
                 </ul>
+            </div>
+            <div class="col-md-12" style="margin-top:20px; display:flex;">
+                @if(auth()->user()->id == $post->user->id)
+                    <a href="{{route('post.edit', $post->slug)}}" class="primary-button" style="margin-right:10px;">Edit</a>
+
+                    <form action="{{route('post.delete', $post->slug)}}" method="post">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="primary-button">Delete</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
@@ -74,11 +85,11 @@
 <!-- post author -->
 <div class="section-row">
     <div class="section-title">
-        <h3 class="title">About <a href="author.html">{{$post->user->name}}</a></h3>
+        <h3 class="title">About <a href="{{route('user.show', $post->user->slug)}}">{{$post->user->name}}</a></h3>
     </div>
     <div class="author media">
         <div class="media-left">
-            <a href="author.html">
+            <a href="{{route('user.show', $post->user->slug)}}">
                 <img class="author-img media-object" src="{{asset('img/avatar-1.jpg')}}" alt="">
             </a>
         </div>
@@ -110,7 +121,7 @@
             </div>
         <div class="media-body" data-token="{{ csrf_token() }}" data-comment-id="{{$comment->id}}" data-route="{{route('comment.store', $post->slug)}}">
                 <div class="media-heading">
-                    <h4>{{$comment->user->name}}</h4>
+                    <h4><a href="{{route('user.show', $comment->user->slug)}}">{{$comment->user->name}}</a></h4>
                     <span class="time">{{$comment->createdAt()}}</span>
                 </div>
                 <p>{{$comment->body}}</p>
@@ -125,7 +136,7 @@
                     </div>
                     <div class="media-body">
                         <div class="media-heading">
-                            <h4>{{$reply->user->name}}</h4>
+                            <h4><a href="{{route('user.show', $reply->user->slug)}}">{{$reply->user->name}}</a></h4>
                             <span class="time">{{$reply->createdAt()}}</span>
                         </div>
                         <p>{{$reply->body}}</p>
