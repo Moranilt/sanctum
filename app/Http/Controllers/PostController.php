@@ -11,7 +11,23 @@ class PostController extends Controller
 {
     public function show(Post $post)
     {
-        return view('post.show')->with('post', $post);
+        $next = Post::where('id', '>', $post->id)->first();
+        $previous = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
+
+        $views = PostsViews::where('post_id', $post->id)->first();
+        if(empty($views)){
+            $views = new PostsViews();
+            $views->post_id = $post->id;
+            $views->views = $views->views + 1;
+            $views->save();
+        }else{
+            $views->views = $views->views + 1;
+            $views->update();
+        }
+
+
+
+        return view('post.show', ['post' => $post, 'next' => $next, 'previous' => $previous]);
     }
 
     public function create()
