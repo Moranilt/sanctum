@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Role;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,5 +49,20 @@ class User extends Authenticatable
     public function getDescriptionAttribute($value)
     {
         return $value ? $value : 'Tell this world more about yourself ;)';
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->roles->pluck('name')->contains('admin');
+    }
+
+    public function isPostAuthor($post)
+    {
+        return $this->posts()->get()->contains($post);
     }
 }

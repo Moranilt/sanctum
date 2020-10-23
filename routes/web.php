@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function(){
 });
 Route::get('/users/{user:slug}', 'UserController@show')->name('user.show');
 
+Route::get('/admin-panel', 'AdminPanelController@index')->name('admin.index')->middleware('admin');
+
 Route::get('/category/{category:slug}', 'CategoryController@show')->name('category.show');
 Route::get('/tags/{tag:slug}', 'TagsController@show')->name('tag.show');
 

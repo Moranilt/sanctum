@@ -15,6 +15,7 @@ class PostSeeder extends Seeder
             $post->addCategory(App\Category::all()->random(rand(1, 2))->pluck('id')->toArray());
             $post->comments()->createMany(factory(App\Comment::class, 10)->make()->toArray());
             $post->views()->save(factory(App\PostsViews::class)->make());
+            $post->tags()->createMany(factory(App\Tag::class, 1)->make()->toArray());
         });
 
 
