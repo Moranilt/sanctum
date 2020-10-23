@@ -21,7 +21,7 @@
             </div>
             @auth
             <div class="col-md-12" style="margin-top:20px; display:flex;">
-                @if(auth()->user()->id == $post->user->id)
+                @if(auth()->user()->isPostAuthor($post) || auth()->user()->isAdmin)
                     <a href="{{route('post.edit', $post->slug)}}" class="primary-button" style="margin-right:10px;">Edit</a>
 
                     <form action="{{route('post.delete', $post->slug)}}" method="post">

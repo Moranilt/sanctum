@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/post/{post:slug}/comment/store', 'CommentController@store')->name('comment.store');
     Route::get('/users/{user:slug}/edit', 'UserController@edit')->name('user.edit');
     Route::put('/users/{user:slug}/update', 'UserController@update')->name('user.update');
+
+    Route::post('/users/{user:slug}/follow', 'FollowsController@store')->name('follow');
 });
 Route::get('/users/{user:slug}', 'UserController@show')->name('user.show');
 

@@ -16,7 +16,23 @@
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 								<li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul>
-                            <a href="{{route('user.edit', $user->slug)}}" class="primary-button" style="margin-top:20px;">Edit</a>
+                            <div class="flex-buttons" style="margin-top:20px;">
+                                @if(auth()->user()->isAdmin || auth()->user()->id == $user->id)
+                                <a href="{{route('user.edit', $user->slug)}}" class="primary-button">Edit</a>
+                                @endif
+                                @if(auth()->user()->id != $user->id)
+                                <form action="{{route('follow', $user->slug)}}" method="POST">
+                                    @csrf
+                                    <button class="primary-button">
+                                        @if(auth()->user()->following($user))
+                                        Unfollow
+                                        @else
+                                        Follow
+                                        @endif
+                                    </button>
+                                </form>
+                                @endif
+                            </div>
 						</div>
 					</div>
 				</div>
