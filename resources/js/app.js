@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('favorite-button', require('./components/Favorite.vue').default);
 Vue.component('comments-template', () => import('./components/Comments.vue'))
 Vue.component('comment-template', require('./components/Comment.vue').default)
 Vue.component('comment-reply-form', require('./components/CommentReplyForm.vue').default)

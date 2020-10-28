@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Role;
+use App\Socials;
 
 class User extends Authenticatable
 {
@@ -61,8 +62,42 @@ class User extends Authenticatable
         return $this->roles->pluck('name')->contains('admin');
     }
 
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
     public function isPostAuthor($post)
     {
         return $this->posts()->get()->contains($post);
+    }
+
+    public function favoritePosts()
+    {
+        return $this->belongsToMany(Post::class, 'favorite_posts', 'user_id', 'post_id');
+    }
+
+    public function addFavoritePost($post)
+    {
+        return $this->favoritePosts()->save($post);
+    }
+
+    public function removeFavoritePost($post)
+    {
+        return $this->favoritePosts()->detach($post);
+    }
+
+    public function isFavoritePost($post)
+    {
+        return $this->favoritePosts()->where('post_id', $post->id)->exists();
+    }
+
+    public function toggleFavoritePost($post)
+    {
+        if($this->isFavoritePost($post)){
+            return $this->removeFavoritePost($post);
+        }
+
+        return $this->addFavoritePost($post);
     }
 }

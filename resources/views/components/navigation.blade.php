@@ -252,6 +252,8 @@
                 <li><a href="{{route('home')}}">Home</a></li>
                 @auth
                 <li><a href="{{route('user.show', auth()->user()->slug)}}">My Profile</a></li>
+                <li><a href="{{route('followers', auth()->user()->slug)}}">Followers</a></li>
+                <li><a href="{{route('following', auth()->user()->slug)}}">Following</a></li>
                 <li><a href="/category/create">Add Category</a></li>
                 <li><a href="{{route('post.create')}}">Create Post</a></li>
                 <li><a href="{{route('logout')}}" onclick="event.preventDefault();
