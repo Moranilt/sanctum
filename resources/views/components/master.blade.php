@@ -9,16 +9,16 @@
     <!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
     <link rel="stylesheet" href="{{mix('css/app.css')}}">
+
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-
+    <script src="https://kit.fontawesome.com/0f0fe750cb.js" crossorigin="anonymous"></script>
 	<!-- Custom stlylesheet -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
 
-    <script rel="{{mix('js/app.js')}}"></script>
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,18 +29,24 @@
 		<![endif]-->
 </head>
 <body>
+
     <x-navigation>
 
     </x-navigation>
+    <div id="app1">
         {{ $slot }}
+    </div>
 
     <x-footer>
 
     </x-footer>
+
 <!-- jQuery Plugins -->
+<script src="{{mix('js/app.js')}}" defer></script>
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+
 </body>
 </html>

@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/post/{post:slug}/favorite', 'UserController@addFavPost');
+Route::delete('/comment/{comment}/delete', 'CommentController@delete');
+Route::post('/post/{post}/comment/store', 'CommentController@store');
+Route::get('/post/{post}/comments', 'CommentController@comments');

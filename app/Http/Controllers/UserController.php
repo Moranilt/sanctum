@@ -2,44 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -100,5 +72,18 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addFavPost(Post $post, Request $request)
+    {
+        $user = User::find($request->user_id);
+        $user->toggleFavoritePost($post);
+        if($user->isFavoritePost($post)){
+            $message = true;
+        }else{
+            $message = false;
+        }
+        //$user->toggleFavoritePost($post);
+        return response()->json(['message' => $message]);
     }
 }

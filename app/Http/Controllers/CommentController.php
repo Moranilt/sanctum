@@ -26,6 +26,18 @@ class CommentController extends Controller
         $comment->body = $data['message'];
         $comment->save();
 
-        return redirect()->back();
+        return response()->json(['message' => 'Created']);
+    }
+
+    public function delete(Comment $comment)
+    {
+        $comment->delete();
+        return response()->json(['message' => 'Deleted!']);
+    }
+
+    public function comments(Post $post)
+    {
+        $comments = $post->comments()->with('user')->with('post')->with('replies.user')->get();
+        return response()->json(['comments' => $comments]);
     }
 }

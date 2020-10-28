@@ -10943,3 +10943,57 @@ span.error {
   margin-top: 20px;
 }
 
+.followers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.followers .follower {
+  display: flex;
+  flex: 0 0 50%;
+  margin-bottom: 20px;
+}
+
+.followers .follower img {
+  margin-right: 10px;
+  width: 60px;
+}
+
+.followers .follower a {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user-role {
+  font-size: 12px;
+  background-color: #af3822;
+  color: #fff;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+.media {
+  position: relative;
+}
+
+.media .delete-comment {
+  outline: none;
+  border: none;
+  font-weight: bold;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button-group :first-child {
+  margin-right: 10px;
+}
+
+.create-comment {
+  margin-top: 30px;
+}
+

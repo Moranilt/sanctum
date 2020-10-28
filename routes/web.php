@@ -25,11 +25,15 @@ Route::middleware('auth')->group(function(){
     Route::patch('/post/{post:slug}/update', 'PostController@update')->name('post.update');
     Route::delete('/post/{post:slug}/delete', 'PostController@delete')->name('post.delete');
 
-    Route::get('/post/{post:slug}/comment/store', 'CommentController@store')->name('comment.store');
+    Route::post('/post/{post}/comment/store', 'CommentController@store')->name('comment.store');
+    Route::delete('/comment/{comment}/delete', 'CommentController@delete')->name('comment.delete');
+
     Route::get('/users/{user:slug}/edit', 'UserController@edit')->name('user.edit');
     Route::put('/users/{user:slug}/update', 'UserController@update')->name('user.update');
 
     Route::post('/users/{user:slug}/follow', 'FollowsController@store')->name('follow');
+    Route::get('/users/{user:slug}/followers', 'FollowsController@followers')->name('followers');
+    Route::get('/user/{user:slug}/following', 'FollowsController@following')->name('following');
 });
 Route::get('/users/{user:slug}', 'UserController@show')->name('user.show');
 
