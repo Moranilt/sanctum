@@ -122,70 +122,15 @@
     </div>
     <div class="post-comments">
 
-        @foreach($post->comments as $comment)
-        <!-- comment -->
-        <div class="media">
-            <div class="media-left">
-                <img class="media-object" src="{{$comment->user->avatar}}" alt="">
-            </div>
-        <div class="media-body" data-token="{{ csrf_token() }}" data-comment-id="{{$comment->id}}" data-route="{{route('comment.store', $post->slug)}}">
-                <div class="media-heading">
-                    <h4><a href="{{route('user.show', $comment->user->slug)}}">{{$comment->user->name}}</a></h4>
-                    <span class="time">{{$comment->createdAt()}}</span>
-                </div>
-                <p>{{$comment->body}}</p>
-                <a href="#" class="reply">Reply</a>
+        <keep-alive>
+        <comments-template :post="{{$post->id}}" :user_id="{{auth()->user()->id}}" :isadmin="@if(auth()->user()->isPostAuthor($post) || auth()->user()->isAdmin) true @else false @endif">
 
-                @if($comment->replies)
-                @foreach($comment->replies as $reply)
-                <!-- comment -->
-                <div class="media media-author">
-                    <div class="media-left">
-                        <img class="media-object" src="{{$reply->user->avatar}}" alt="">
-                    </div>
-                    <div class="media-body">
-                        <div class="media-heading">
-                            <h4><a href="{{route('user.show', $reply->user->slug)}}">{{$reply->user->name}}</a></h4>
-                            <span class="time">{{$reply->createdAt()}}</span>
-                        </div>
-                        <p>{{$reply->body}}</p>
-                    </div>
-                </div>
-                <!-- /comment -->
-
-                @endforeach
-                @endif
-            </div>
-        </div>
-        <!-- /comment -->
-        @endforeach
+        </comments-template>
+        </keep-alive>
     </div>
 </div>
 <!-- /post comments -->
 
-
-<!-- post reply -->
-<div class="section-row">
-    <div class="section-title">
-        <h3 class="title">Leave a reply</h3>
-    </div>
-    <form class="post-reply" action="{{route('comment.store', $post->slug)}}">
-        @csrf
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <textarea class="input" name="message" placeholder="Message"></textarea>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <button class="primary-button">Submit</button>
-            </div>
-
-        </div>
-    </form>
-</div>
-<!-- /post reply -->
 @endsection
 
 
