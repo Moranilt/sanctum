@@ -7,14 +7,26 @@
 				<div class="row">
 					<div class="col-md-offset-1 col-md-10 text-center">
 						<div class="author">
-							<img class="author-img center-block" src="{{$user->avatar}}" alt="">
-							<h1 class="text-uppercase">{{$user->name}}</h1>
+                            <img class="author-img center-block" src="{{$user->avatar}}" alt="">
+                            @if($user->isAdmin)
+                            <span class="user-role">{{$user->roles->first()->name}}</span>
+                            @endif
+                            <h1 class="text-uppercase">{{$user->name}} </h1>
+
 							<p class="lead">{{$user->description}}</p>
 							<ul class="author-social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                @if($user->facebook)
+                                <li><a href="{{$user->facebook}}"><i class="fa fa-facebook"></i></a></li>
+                                @endif
+                                @if($user->twitter)
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                @endif
+                                @if($user->google)
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                @endif
+                                @if($user->instagram)
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                @endif
                             </ul>
                             <div class="flex-buttons" style="margin-top:20px;">
                                 @if(auth()->user()->isAdmin || auth()->user()->id == $user->id)

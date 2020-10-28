@@ -52,6 +52,42 @@
 									</div>
                                 </div>
 
+                                <div class="col-md-12">
+									<div class="form-group">
+                                    <input class="input @error('google')error @enderror" type="text" name="facebook" placeholder="Facebook">
+                                        @error('facebook')
+                                        <span class="error">{{$message}}</span>
+                                        @enderror
+									</div>
+                                </div>
+
+                                <div class="col-md-12">
+									<div class="form-group">
+                                    <input class="input @error('google')error @enderror" type="text" name="google" placeholder="google">
+                                        @error('google')
+                                        <span class="error">{{$message}}</span>
+                                        @enderror
+									</div>
+                                </div>
+
+                                <div class="col-md-12">
+									<div class="form-group">
+                                    <input class="input @error('twitter')error @enderror" type="text" name="twitter" placeholder="twitter">
+                                        @error('twitter')
+                                        <span class="error">{{$message}}</span>
+                                        @enderror
+									</div>
+                                </div>
+
+                                <div class="col-md-12">
+									<div class="form-group">
+                                    <input class="input @error('instagram')error @enderror" type="text" name="instagram" placeholder="instagram">
+                                        @error('instagram')
+                                        <span class="error">{{$message}}</span>
+                                        @enderror
+									</div>
+                                </div>
+
 								<div class="col-md-12">
 									<div class="form-group">
                                     <textarea class="input @error('description')error @enderror" name="description" placeholder="Tell us something about yourself!">{{$user->description}}</textarea>

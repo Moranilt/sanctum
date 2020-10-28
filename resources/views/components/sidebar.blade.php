@@ -73,7 +73,7 @@
     </div>
     <!-- post -->
     <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="./img/widget-3.jpg" alt=""></a>
+        <a class="post-img" href="blog-post.html"><img src="{{asset('img/widget-3.jpg')}}" alt=""></a>
         <div class="post-body">
             <div class="post-category">
                 <a href="category.html">Lifestyle</a>
@@ -85,7 +85,7 @@
 
     <!-- post -->
     <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a>
+        <a class="post-img" href="blog-post.html"><img src="{{asset('img/widget-2.jpg')}}" alt=""></a>
         <div class="post-body">
             <div class="post-category">
                 <a href="category.html">Technology</a>
@@ -98,7 +98,7 @@
 
     <!-- post -->
     <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="./img/widget-4.jpg" alt=""></a>
+        <a class="post-img" href="blog-post.html"><img src="{{asset('img/widget-4.jpg')}}" alt=""></a>
         <div class="post-body">
             <div class="post-category">
                 <a href="category.html">Health</a>
@@ -110,7 +110,7 @@
 
     <!-- post -->
     <div class="post post-widget">
-        <a class="post-img" href="blog-post.html"><img src="./img/widget-5.jpg" alt=""></a>
+        <a class="post-img" href="blog-post.html"><img src="{{asset('img/widget-5.jpg')}}" alt=""></a>
         <div class="post-body">
             <div class="post-category">
                 <a href="category.html">Health</a>
@@ -130,12 +130,12 @@
     </div>
     <div class="galery-widget">
         <ul>
-            <li><a href="#"><img src="./img/galery-1.jpg" alt=""></a></li>
-            <li><a href="#"><img src="./img/galery-2.jpg" alt=""></a></li>
-            <li><a href="#"><img src="./img/galery-3.jpg" alt=""></a></li>
-            <li><a href="#"><img src="./img/galery-4.jpg" alt=""></a></li>
-            <li><a href="#"><img src="./img/galery-5.jpg" alt=""></a></li>
-            <li><a href="#"><img src="./img/galery-6.jpg" alt=""></a></li>
+            <li><a href="#"><img src="{{asset('img/galery-1.jpg')}}" alt=""></a></li>
+            <li><a href="#"><img src="{{asset('img/galery-2.jpg')}}" alt=""></a></li>
+            <li><a href="#"><img src="{{asset('img/galery-3.jpg')}}" alt=""></a></li>
+            <li><a href="#"><img src="{{asset('img/galery-4.jpg')}}" alt=""></a></li>
+            <li><a href="#"><img src="{{asset('img/galery-5.jpg')}}" alt=""></a></li>
+            <li><a href="#"><img src="{{asset('img/galery-6.jpg')}}" alt=""></a></li>
         </ul>
     </div>
 </div>
