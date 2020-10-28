@@ -49,7 +49,11 @@ class UserController extends Controller
             'avatar' => ['file'],
             'email' => ['string', 'required', 'email', 'max:255', Rule::unique('users')->ignore($user)],
             'password' => ['string', 'required', 'min:8', 'max:255', 'confirmed'],
-            'description' => ['string', 'required', 'max:255']
+            'description' => ['string', 'required', 'max:255'],
+            'facebook' => ['max:255', 'nullable', 'url'],
+            'instagram' => ['max:255', 'nullable', 'url'],
+            'google' => ['max:255', 'nullable', 'url'],
+            'twitter' => ['max:255', 'nullable', 'url']
         ]);
 
         if($request->avatar){

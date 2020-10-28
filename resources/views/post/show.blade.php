@@ -21,8 +21,13 @@
             </div>
             @auth
             <div class="col-md-12" style="margin-top:20px; display:flex;">
+
+                <favorite-button isactive="@if(auth()->user()->isFavoritePost($post)) true @else false @endif" data="{{$post->slug}}" user_id="{{auth()->user()->id}}">
+
+                </favorite-button>
+
                 @if(auth()->user()->isPostAuthor($post) || auth()->user()->isAdmin)
-                    <a href="{{route('post.edit', $post->slug)}}" class="primary-button" style="margin-right:10px;">Edit</a>
+                    <a href="{{route('post.edit', $post->slug)}}" class="primary-button" style="margin-right:10px;margin-left:10px;">Edit</a>
 
                     <form action="{{route('post.delete', $post->slug)}}" method="post">
                         @method('DELETE')
