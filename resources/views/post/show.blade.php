@@ -123,7 +123,7 @@
     <div class="post-comments">
 
         <keep-alive>
-        <comments-template :post="{{$post->id}}" :user_id="{{auth()->user()->id}}" :isadmin="@if(auth()->user()->isPostAuthor($post) || auth()->user()->isAdmin) true @else false @endif">
+        <comments-template :post="{{$post->id}}" @auth :user_id="{{auth()->user()->id}}" :isadmin="@if(auth()->user()->isPostAuthor($post) || auth()->user()->isAdmin) true @else false @endif"@endauth>
 
         </comments-template>
         </keep-alive>
