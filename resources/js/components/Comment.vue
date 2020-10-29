@@ -45,8 +45,8 @@ export default {
         }
     },
     methods:{
-        addReply:function(){
-            this.$parent.updateComments()
+        addReply:function(value){
+            this.$parent.updateComments(value)
             this.showForm = false
         }
     }

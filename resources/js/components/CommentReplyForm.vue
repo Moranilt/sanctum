@@ -33,7 +33,7 @@ export default {
               message: this.message
           }).then(response => {
               console.log(response.data.message)
-              this.$parent.addReply()
+              this.$parent.addReply(response.data.message)
           })
       }
   }

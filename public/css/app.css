@@ -10997,3 +10997,31 @@ span.error {
   margin-top: 30px;
 }
 
+.pop-out-msg {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: green;
+  color: #fafafa;
+  padding: 15px 30px;
+}
+
+.pop-out-msg p {
+  padding: 0;
+  margin: 0;
+}
+
+.pop-out-msg ::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\F14A";
+  position: absolute;
+  left: 13px;
+  top: 16px;
+}
+
+.error-msg {
+  background-color: #ca3352;
+}
+

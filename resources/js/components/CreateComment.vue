@@ -42,7 +42,7 @@ export default {
       axios.post("/post/" + this.$parent.post + "/comment/store", {
           message: this.message,
         }).then(response => {
-          this.$parent.updateComments()
+          this.$parent.updateComments(response.data.message)
           this.message = ''
         })
     }

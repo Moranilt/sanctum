@@ -26,6 +26,7 @@ Vue.component('comment-template', require('./components/Comment.vue').default)
 Vue.component('comment-reply-form', require('./components/CommentReplyForm.vue').default)
 Vue.component('reply-component', require('./components/Reply.vue').default)
 Vue.component('create-comment', require('./components/CreateComment.vue').default)
+Vue.component('pop-out-msg', require('./components/PopOutMsg.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
