@@ -22,7 +22,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -36,9 +35,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       postComments: '',
-      showDelete: this.isadmin,
-      message: 'winner',
-      showMsg: false
+      showDelete: this.isadmin
     };
   },
   mounted: function mounted() {
@@ -66,10 +63,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/post/' + this.post + '/comments').then(function (response) {
         _this3.postComments = response.data.comments;
         _this3.showForm = false;
-        _this3.message = value;
-        _this3.showMsg = true;
+        _this3.$parent.message = value;
+        _this3.$parent.showMsg = true;
         setTimeout(function () {
-          return _this3.showMsg = false;
+          return _this3.$parent.showMsg = false;
         }, 2000);
       });
     }
@@ -115,19 +112,7 @@ var render = function() {
         ])
       }),
       _vm._v(" "),
-      _c("create-comment"),
-      _vm._v(" "),
-      _c("pop-out-msg", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.showMsg,
-            expression: "showMsg"
-          }
-        ],
-        attrs: { message: _vm.message }
-      })
+      _c("create-comment")
     ],
     2
   )

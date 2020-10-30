@@ -18,7 +18,10 @@
     <script src="https://kit.fontawesome.com/0f0fe750cb.js" crossorigin="anonymous"></script>
 	<!-- Custom stlylesheet -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
-
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,6 +38,9 @@
     </x-navigation>
     <div id="app1">
         {{ $slot }}
+        <transition name="custom-classes-transition" enter-active-class="animate__animated animate__slideInDown" leave-active-class="animate__animated animate__slideOutUp">
+            <pop-out-msg v-show="showMsg" :message="message"></pop-out-msg>
+        </transition>
     </div>
 
     <x-footer>

@@ -5,7 +5,6 @@
         </comment>
         <create-comment></create-comment>
 
-        <pop-out-msg v-show="showMsg" :message="message"></pop-out-msg>
     </div>
 </template>
 
@@ -21,8 +20,6 @@ export default {
         return{
             postComments: '',
             showDelete: this.isadmin,
-            message: 'winner',
-            showMsg: false
         }
     },
     mounted(){
@@ -42,9 +39,9 @@ export default {
             axios.get('/api/post/'+this.post+'/comments').then(response => {
                 this.postComments = response.data.comments
                 this.showForm = false
-                this.message = value
-                this.showMsg = true
-                setTimeout(() => this.showMsg = false, 2000)
+                this.$parent.message = value
+                this.$parent.showMsg = true
+                setTimeout(() => this.$parent.showMsg = false, 2000)
             })
 
         }

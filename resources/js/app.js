@@ -36,6 +36,10 @@ Vue.component('pop-out-msg', require('./components/PopOutMsg.vue').default)
 
 const app = new Vue({
     el: '#app1',
+    data:{
+        showMsg: false,
+        message: ''
+    }
 });
 
 

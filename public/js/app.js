@@ -2244,6 +2244,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PopOutMsg_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopOutMsg.vue */ "./resources/js/components/PopOutMsg.vue");
 //
 //
 //
@@ -2251,8 +2252,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data', 'user_id', 'isactive'],
+  components: {
+    PopOutMsg: _PopOutMsg_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       text: '',
@@ -2277,8 +2283,18 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.data.message) {
           _this.isActive2 = true;
+          _this.$parent.showMsg = true;
+          setTimeout(function () {
+            return _this.$parent.showMsg = false;
+          }, 2000);
+          _this.$parent.message = 'Added to favorite posts';
         } else {
           _this.isActive2 = false;
+          _this.$parent.showMsg = true;
+          setTimeout(function () {
+            return _this.$parent.showMsg = false;
+          }, 2000);
+          _this.$parent.message = 'Removed from favorite posts';
         }
       });
     }
@@ -59808,32 +59824,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      attrs: { action: "#", method: "POST" },
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.addFavoritePost($event)
+  return _c("div", [
+    _c(
+      "form",
+      {
+        attrs: { action: "#", method: "POST" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.addFavoritePost($event)
+          }
         }
-      }
-    },
-    [
-      _c(
-        "button",
-        { staticClass: "primary-button", attrs: { type: "submit" } },
-        [
-          _c("i", {
-            staticClass: " fa-star",
-            class: { far: !_vm.isActive2, fas: _vm.isActive2 },
-            staticStyle: { "margin-right": "5px" }
-          }),
-          _vm._v(_vm._s(_vm.textComputed))
-        ]
-      )
-    ]
-  )
+      },
+      [
+        _c(
+          "button",
+          { staticClass: "primary-button", attrs: { type: "submit" } },
+          [
+            _c("i", {
+              staticClass: " fa-star",
+              class: { far: !_vm.isActive2, fas: _vm.isActive2 },
+              staticStyle: { "margin-right": "5px" }
+            }),
+            _vm._v(_vm._s(_vm.textComputed))
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -72117,7 +72135,11 @@ Vue.component('pop-out-msg', __webpack_require__(/*! ./components/PopOutMsg.vue 
  */
 
 var app = new Vue({
-  el: '#app1'
+  el: '#app1',
+  data: {
+    showMsg: false,
+    message: ''
+  }
 });
 
 /***/ }),
