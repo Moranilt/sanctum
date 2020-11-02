@@ -50,8 +50,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios["delete"]('/api/comment/' + id + '/delete').then(function (response) {
-        console.log(response.data.message);
-
         _this2.postComments.splice(index, 1);
 
         _this2.updateComments(response.data.message);

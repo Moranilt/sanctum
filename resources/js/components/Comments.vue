@@ -30,7 +30,6 @@ export default {
     methods:{
         deleteComment: function(id, index){
             axios.delete('/api/comment/'+id+'/delete').then(response => {
-                console.log(response.data.message)
                 this.postComments.splice(index, 1)
                 this.updateComments(response.data.message)
             })

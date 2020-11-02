@@ -19,13 +19,13 @@
                                 <li><a href="{{$user->facebook}}"><i class="fa fa-facebook"></i></a></li>
                                 @endif
                                 @if($user->twitter)
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="{{$user->twitter}}"><i class="fa fa-twitter"></i></a></li>
                                 @endif
                                 @if($user->google)
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="{{$user->google}}"><i class="fa fa-google-plus"></i></a></li>
                                 @endif
                                 @if($user->instagram)
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="{{$user->instagram}}"><i class="fa fa-instagram"></i></a></li>
                                 @endif
                             </ul>
                             <div class="flex-buttons" style="margin-top:20px;">
